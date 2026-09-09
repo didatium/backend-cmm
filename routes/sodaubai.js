@@ -18,8 +18,9 @@ router.put('/sodaubai/:record_id', auth, authorizeSoDauBai, sodaubaiController.u
 // delete by record_id (protected)
 router.delete('/sodaubai/:record_id', auth, authorizeSoDauBai, sodaubaiController.deleteSoDauBai);
 
-// delete by class_id (protected)
-router.delete('/sodaubai/:class_id', auth, authorizeSoDauBai, sodaubaiController.deleteSoDauBaiByClass);
+// delete by class_id (protected). This must not share the record_id route
+// above: Express would always match the first parameterized route.
+router.delete('/sodaubai/class/:class_id', auth, authorizeSoDauBai, sodaubaiController.deleteSoDauBaiByClass);
 
 // delete all
 router.delete('/sodaubaiall', auth, requireRole('admin'), sodaubaiController.deleteAll);

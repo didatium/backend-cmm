@@ -20,7 +20,7 @@ async function updateLichtruc({ class_active, class_passive, week_id }) {
 }
 
 async function deleteByClass(classId) {
-    return query('DELETE FROM Lichtruc WHERE class_active = ?', [classId])
+    return query('DELETE FROM Lichtruc WHERE class_active = ? OR class_passive = ?', [classId, classId])
 }
 
 async function deleteAllLichtruc() {

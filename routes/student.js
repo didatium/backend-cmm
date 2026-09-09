@@ -10,5 +10,7 @@ router.get('/studentclass/:class_id', studentController.getByClass);
 router.post('/student', auth, requireRole('admin'), studentController.createStudent);
 router.put('/student', auth, requireRole('admin'), studentController.updateStudent);
 router.delete('/student/:student_id', auth, requireRole('admin'), studentController.deleteStudent);
+router.delete('/studentclass/:class_id', auth, requireRole('admin'), studentController.deleteStudentsByClass);
+router.delete('/studentall', auth, requireRole('admin'), studentController.deleteAllStudents);
 
 module.exports = router;

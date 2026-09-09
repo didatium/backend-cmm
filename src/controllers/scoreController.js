@@ -23,11 +23,8 @@ async function getAllWeeks(req, res, next) {
 async function deleteByClass(req, res, next) {
   try {
     const { class_id } = req.params;
-    const result = await scoreService.removeByClass(class_id);
-    if (result.affectedRows === 0) {
-      return res.status(404).json({ success: false, message: 'Score not found for class' });
-    }
-    res.status(200).json({ success: true, message: `Delete score of ${ class_id }!` });
+    await scoreService.removeByClass(class_id);
+    res.status(200).json({ success: true, message: `Delete score of ${class_id}!` });
   } catch (err) {
     next(err);
   }
@@ -35,7 +32,7 @@ async function deleteByClass(req, res, next) {
 
 async function deleteAll(req, res, next) {
   try {
-    await scoreService.removeAll();    
+    await scoreService.removeAll();
     res.status(200).json({ success: true, message: `Delete score of all classes!` });
   } catch (err) {
     next(err);

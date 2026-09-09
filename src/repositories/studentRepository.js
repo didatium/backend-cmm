@@ -69,11 +69,21 @@ async function deleteStudent(studentId) {
   return result.affectedRows > 0;
 }
 
+async function deleteStudentsByClass(classId) {
+  return query('DELETE FROM Student WHERE class_id = ?', [classId]);
+}
+
+async function deleteAllStudents() {
+  return query('DELETE FROM Student');
+}
+
 module.exports = {
   getAllStudents,
   getStudentById,
   getStudentsByClassId,
   createStudent,
   updateStudent,
-  deleteStudent
+  deleteStudent,
+  deleteStudentsByClass,
+  deleteAllStudents
 };

@@ -105,11 +105,40 @@ async function deleteById(vpmId) {
 }
 
 async function deleteByClass(classId) {
-  return query('DELETE FROM Vipham WHERE class_id = ?', [classId]);
+  const conn = await pool.getConnection();
+  try {
+    await conn.beginTransaction();
+    await conn.execute(
+      `DELETE vs FROM ViphamStudent vs
+       INNER JOIN Vipham v ON v.vpm_id = vs.vpm_id
+       WHERE v.class_id = ?`,
+      [classId],
+    );
+    const [result] = await conn.execute('DELETE FROM Vipham WHERE class_id = ?', [classId]);
+    await conn.commit();
+    return result;
+  } catch (err) {
+    await conn.rollback();
+    throw err;
+  } finally {
+    conn.release();
+  }
 }
 
 async function deleteAll() {
-  return query('DELETE FROM Vipham');
+  const conn = await pool.getConnection();
+  try {
+    await conn.beginTransaction();
+    await conn.execute('DELETE FROM ViphamStudent');
+    const [result] = await conn.execute('DELETE FROM Vipham');
+    await conn.commit();
+    return result;
+  } catch (err) {
+    await conn.rollback();
+    throw err;
+  } finally {
+    conn.release();
+  }
 }
 
 async function createVipham({ week_id, class_id, name_vp_id, quantity,

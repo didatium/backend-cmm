@@ -72,11 +72,32 @@ async function deleteStudent(req, res, next) {
   }
 }
 
+async function deleteStudentsByClass(req, res, next) {
+  try {
+    const { class_id } = req.params;
+    await studentService.removeStudentsByClass(class_id);
+    res.status(200).json({ success: true, message: `Students deleted for ${class_id}` });
+  } catch (error) {
+    next(error);
+  }
+}
+
+async function deleteAllStudents(req, res, next) {
+  try {
+    await studentService.removeAllStudents();
+    res.status(200).json({ success: true, message: 'All students deleted' });
+  } catch (error) {
+    next(error);
+  }
+}
+
 module.exports = {
   listStudents,
   getStudent,
   getByClass,
   createStudent,
   updateStudent,
-  deleteStudent
+  deleteStudent,
+  deleteStudentsByClass,
+  deleteAllStudents
 };

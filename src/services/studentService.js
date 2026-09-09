@@ -24,11 +24,21 @@ async function removeStudent(studentId) {
   return studentRepository.deleteStudent(studentId);
 }
 
+async function removeStudentsByClass(classId) {
+  return studentRepository.deleteStudentsByClass(classId);
+}
+
+async function removeAllStudents() {
+  return studentRepository.deleteAllStudents();
+}
+
 module.exports = {
   listStudents,
   findStudentById,
   findStudentByClassId,
   createStudent,
   updateStudent,
-  removeStudent
+  removeStudent,
+  removeStudentsByClass,
+  removeAllStudents
 };
