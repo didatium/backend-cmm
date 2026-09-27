@@ -36,7 +36,6 @@ Hệ thống máy chủ backend xây dựng trên nền tảng **Node.js + Expre
 | **Xác thực & Bảo mật** | `jsonwebtoken` (JWT), `bcryptjs`, `express-rate-limit`, `cors` |
 | **Kiểm thực dữ liệu & Upload** | `joi`, `multer`, `body-parser` |
 | **Tài liệu API (OpenAPI/Swagger)** | `swagger-ui-express`, `swagger-autogen` |
-| **Logging & Lập lịch tác vụ** | `winston`, `node-schedule` |
 
 ---
 
